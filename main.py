@@ -85,6 +85,7 @@ def uniformCostSearch(puzzle, heuristic):
         if currentNode.data == goalState:
 
 
+
             print()
             print("Solution found")
             print(f"Goal state was found at depth {currentNode.depth}")
