@@ -15,7 +15,7 @@ g = [[0, 7, 2], [4, 6, 1], [3, 5, 8]]
 
 
 def main():
-    puzzleMode = int(input("Enter 1 for default puzzle, 2 to make your own puzzle"))
+    puzzleMode = int(input("Enter 1 for default puzzle, 2 to make your own puzzle: "))
     if puzzleMode == 1:
         selectAlgorithm(defaultPuzzleSelect())
 
@@ -59,14 +59,11 @@ def uniformCostSearch(puzzle, heuristic):
     goalState= [[1, 2, 3], [4,5,6], [7,8,0]]
 
     startingState = Node(puzzle)
-
     if heuristic == 0:
         startingState.algorithm = "UCS"
-
-    if heuristic == 1:
+    elif heuristic == 1:
         startingState.algorithm = "MST"
-
-    if heuristic == 2:
+    elif heuristic == 2:
         startingState.algorithm = "MNH"
 
     queueStack = []
@@ -83,23 +80,25 @@ def uniformCostSearch(puzzle, heuristic):
     while  len(queueStack) > 0:
         maxQueueSize = max(maxQueueSize, len(queueStack))
         currentNode = min_heap.heappop(queueStack)
+        printStack.append(currentNode.data)
 
         if currentNode.data == goalState:
-            # while len(printStack) > 0:
-            #     printStack.pop()
-            #     print()
-            # print()
+
+
+            print()
             print("Solution found")
             print(f"Goal state was found at depth {currentNode.depth}")
-            print(f"Number of Nodes expanded: {currentNode.numNodeExpanded}")
+            print(f"Number of Nodes expanded: {Node.totalNumNodeExpanded}")
             print(f"Max Queue Size: {maxQueueSize}")
             return
         # for i in range(3):
         #     for j in range(3):
         #         print(currentNode.data[i][j], end=" ")
-        #     print()  # Add a newline between states
+        #     print()
         printStack.append(currentNode.data)
         currentNode.expand(queueStack, seenList)
+
+
 
 
 main()
